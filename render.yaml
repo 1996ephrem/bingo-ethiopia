@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: ethio-bingo-backend
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: python run.py
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+      - key: WEBAPP_URL
+        sync: false
+      - key: CRYPTOBOT_TOKEN
+        sync: false
+      - key: BIRR_PER_USDT
+        value: "55.0"
+      - key: WEBHOOK_BASE_URL
+        sync: false
+      - key: DATABASE_URL
+        fromDatabase:
+          name: ethio-bingo-db
+          property: connectionString
+
+databases:
+  - name: ethio-bingo-db
+    databaseName: bingodb
+    user: bingo
